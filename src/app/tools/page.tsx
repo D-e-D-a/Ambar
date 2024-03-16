@@ -7,7 +7,7 @@ export interface cardsProps {
   category: string;
   items: SmallCardProps[];
 }
-const page = () => {
+export default function page() {
   const cards: cardsProps[] = [
     {
       category: 'drills',
@@ -83,6 +83,4 @@ const page = () => {
       <AllTools cards={cards} />
     </main>
   );
-};
-
-export default page;
+}

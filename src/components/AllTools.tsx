@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { Each } from './Each';
-import { cardsProps } from '@/app/all-tools/page';
+import { cardsProps } from '@/app/tools/page';
 import { useSearchParams } from 'next/navigation';
 import SmallCard from './SmallCard';
 

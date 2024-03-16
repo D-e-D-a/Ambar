@@ -7,7 +7,7 @@ import { MenuIcon, X } from 'lucide-react';
 
 const Navbar = () => {
   const navigation = [
-    { name: 'Alati', href: '/all-tools' },
+    { name: 'Alati', href: '/tools' },
     { name: 'O nama', href: '/about' },
     { name: 'Blog', href: '/blog' },
     { name: 'Kreativni hub', href: '/hub' },
