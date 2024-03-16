@@ -1,15 +1,13 @@
-import { Each } from '@/components/Each';
+import AllTools from '@/components/AllTools';
 import SearchBar from '@/components/SearchBar';
 import { SelectBar } from '@/components/SelectBar';
-import SmallCard from '@/components/SmallCard';
 import { SmallCardProps } from '@/lib/interfaces';
 
+export interface cardsProps {
+  category: string;
+  items: SmallCardProps[];
+}
 const page = () => {
-  interface cardsProps {
-    category: string;
-    items: SmallCardProps[];
-  }
-
   const cards: cardsProps[] = [
     {
       category: 'drills',
@@ -58,11 +56,15 @@ const page = () => {
         // Add more wrench items as needed
       ],
     },
+    {
+      category: 'nesta',
+      items: [],
+    },
     // Add more categories as needed
   ];
 
   return (
-    <main className=" overflow-hidden space-y-8">
+    <main className=" overflow-hidden space-y-8 mt-11">
       <div className="text-secondary max-w-[490px]">
         <h2 className="text-xl md:text-3xl  font-semibold">Rentiraj sve potrebne alate</h2>
         <p className="text-base">
@@ -70,25 +72,15 @@ const page = () => {
           upotrebu
         </p>
       </div>
-      <div className="flex justify-between items-center">
-        {/* <SelectBar tools={cards} /> */}
+      <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4">
+        <SelectBar tools={cards} />
         <SearchBar className="h-10 rounded-lg lg:max-w-[837px]" />
         <p className="text-secondary-foreground text-base font-normal">
           Trenutno dostupno 200 alata
         </p>
       </div>
 
-      <Each
-        className="flex flex-col gap-5 "
-        of={cards}
-        render={(card) => (
-          <Each
-            className="flex flex-wrap gap-5 justify-between items-center"
-            of={card.items}
-            render={(item) => <SmallCard {...item} />}
-          />
-        )}
-      />
+      <AllTools cards={cards} />
     </main>
   );
 };

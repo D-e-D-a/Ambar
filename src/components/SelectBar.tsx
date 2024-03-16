@@ -23,20 +23,15 @@ interface SelectBarProps {
 }
 
 export function SelectBar({ tools }: SelectBarProps) {
-  const [value, setValue] = useState('');
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   router.push(`?category=${value}`);
-  // }, [router, value]);
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  // const handleCategorySelect = (category: string) => {
-  //   router.push(`?category=${category}`);
-  // };
+  const handleCategorySelect = (category: string) => {
+    router.push(`?category=${category}`);
+  };
+  const searchCategory = searchParams.get('category');
   return (
-    <Select >
+    <Select onValueChange={handleCategorySelect} value={searchCategory || ''}>
       <SelectTrigger className="w-[205px] focus:ring-0 focus:ring-offset-0 bg-white">
         <SelectValue placeholder="Kategorije" />
       </SelectTrigger>
