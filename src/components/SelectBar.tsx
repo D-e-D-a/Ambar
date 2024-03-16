@@ -13,7 +13,7 @@ import {
 import { SmallCardProps } from '@/lib/interfaces';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Suspense } from 'react';
+import { useEffect, useState } from 'react';
 
 interface SelectBarProps {
   tools: {
@@ -31,7 +31,6 @@ export function SelectBar({ tools }: SelectBarProps) {
   };
   const searchCategory = searchParams.get('category');
   return (
-    <Suspense fallback={<div className='text-center'>Loading...</div>}>
     <Select onValueChange={handleCategorySelect} value={searchCategory || ''}>
       <SelectTrigger className="w-[205px] focus:ring-0 focus:ring-offset-0 bg-white">
         <SelectValue placeholder="Kategorije" />
@@ -50,6 +49,5 @@ export function SelectBar({ tools }: SelectBarProps) {
         </SelectGroup>
       </SelectContent>
     </Select>
-    </Suspense>
   );
 }

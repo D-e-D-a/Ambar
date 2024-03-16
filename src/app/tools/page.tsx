@@ -2,6 +2,7 @@ import AllTools from '@/components/AllTools';
 import SearchBar from '@/components/SearchBar';
 import { SelectBar } from '@/components/SelectBar';
 import { SmallCardProps } from '@/lib/interfaces';
+import { Suspense } from 'react';
 
 export interface cardsProps {
   category: string;
@@ -64,6 +65,7 @@ export default function page() {
   ];
 
   return (
+    <Suspense fallback={<div className='text-center'>Loading...</div>}>
     <main className=" overflow-hidden space-y-8 mt-11">
       <div className="text-secondary max-w-[490px]">
         <h2 className="text-xl md:text-3xl  font-semibold">Rentiraj sve potrebne alate</h2>
@@ -82,5 +84,6 @@ export default function page() {
 
       <AllTools cards={cards} />
     </main>
+    </Suspense>
   );
 }
