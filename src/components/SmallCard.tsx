@@ -10,8 +10,9 @@ import {
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
-import { Button } from './ui/button';
+import { Button, buttonVariants } from './ui/button';
 import { SmallCardProps } from '@/lib/interfaces';
+import Link from 'next/link';
 
 const SmallCard = ({
   className,
@@ -21,6 +22,7 @@ const SmallCard = ({
   place,
   price,
   title,
+  link
 }: SmallCardProps) => {
   return (
     <Card
@@ -45,7 +47,7 @@ const SmallCard = ({
         </p>
       </CardContent>
       <CardFooter className="p-0 w-full">
-        <Button className="w-full">Rezervisi</Button>
+        <Link href={link} className={`${buttonVariants({ variant: 'default' })} w-full`}>Rezervisi</Link>
       </CardFooter>
     </Card>
   );

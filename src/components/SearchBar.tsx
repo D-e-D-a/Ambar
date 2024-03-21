@@ -14,8 +14,8 @@ const SearchBar = ({ className }: { className?: string }) => {
       <Search className=" left-3 text-secondary-foreground " />
 
       <Input
-        placeholder="Potrazi ono sto ti treba"
-        className="hide-placeholder placeholder:text-input  text-normal bg-white border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-secondary"
+        placeholder="Npr. Brusilica"
+        className=" placeholder:text-input  text-normal bg-white border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-secondary"
       />
     </div>
   );

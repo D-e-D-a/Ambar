@@ -21,6 +21,7 @@ export default function page() {
           description: 'Rucna busilica sa dodacima za srafljenje i busenje',
           place: 'Podgorica',
           price: 200,
+          link: '/drills',
         },
         {
           id: 2,
@@ -30,6 +31,7 @@ export default function page() {
           description: 'Rucna busilica sa dodacima za srafljenje i busenje',
           place: 'Podgorica',
           price: 200,
+          link: '/drills/pro-drill',
         },
         {
           id: 3,
@@ -39,6 +41,7 @@ export default function page() {
           description: 'Rucna busilica sa dodacima za srafljenje i busenje',
           place: 'Podgorica',
           price: 200,
+          link: '/drills/power-pro-drill',
         },
       ],
     },
@@ -53,6 +56,7 @@ export default function page() {
           description: 'Rucna busilica sa dodacima za srafljenje i busenje',
           place: 'Podgorica',
           price: 200,
+          link: '/wrenches/turbodrive-impact-wrench',
         },
         // Add more wrench items as needed
       ],
@@ -65,25 +69,25 @@ export default function page() {
   ];
 
   return (
-    <Suspense fallback={<div className='text-center'>Loading...</div>}>
-    <main className=" overflow-hidden space-y-8 mt-11">
-      <div className="text-secondary max-w-[490px]">
-        <h2 className="text-xl md:text-3xl  font-semibold">Rentiraj sve potrebne alate</h2>
-        <p className="text-base">
-          ambar omogucava rentiranje razlicitih vrsta alata, rentiranje je namjenjeno za kratkorocnu
-          upotrebu
-        </p>
-      </div>
-      <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4">
-        <SelectBar tools={cards} />
-        <SearchBar className="h-10 rounded-lg lg:max-w-[837px]" />
-        <p className="text-secondary-foreground text-base font-normal">
-          Trenutno dostupno 200 alata
-        </p>
-      </div>
+    <Suspense fallback={<div className="text-center">Loading...</div>}>
+      <main className=" overflow-hidden space-y-8 mt-11">
+        <div className="text-secondary max-w-[490px]">
+          <h2 className="text-xl md:text-3xl  font-semibold">Rentiraj sve potrebne alate</h2>
+          <p className="text-base">
+            ambar omogucava rentiranje razlicitih vrsta alata, rentiranje je namjenjeno za
+            kratkorocnu upotrebu
+          </p>
+        </div>
+        <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4">
+          <SelectBar tools={cards} />
+          <SearchBar className="h-10 rounded-lg lg:max-w-[837px]" />
+          <p className="text-secondary-foreground text-base font-normal">
+            Trenutno dostupno 200 alata
+          </p>
+        </div>
 
-      <AllTools cards={cards} />
-    </main>
+        <AllTools cards={cards} />
+      </main>
     </Suspense>
   );
 }

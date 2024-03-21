@@ -36,11 +36,11 @@
   }
 }
 
-@media screen and (max-width: 430px) {
+/* @media screen and (max-width: 430px) {
   .hide-placeholder::placeholder {
     @apply invisible;
   }
-}
+} */
 
 .glass {
 background: rgba(255, 255, 255, 0.05);

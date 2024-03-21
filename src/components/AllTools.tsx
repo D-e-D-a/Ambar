@@ -4,6 +4,7 @@ import { Each } from './Each';
 import { cardsProps } from '@/app/tools/page';
 import { useSearchParams } from 'next/navigation';
 import SmallCard from './SmallCard';
+import { link } from 'fs';
 
 interface AllToolsProps {
   cards: cardsProps[];
@@ -31,7 +32,7 @@ const AllTools = ({ cards }: AllToolsProps) => {
           <Each
             className="flex flex-wrap gap-5 justify-center md:justify-between items-center "
             of={card.items}
-            render={(item) => <SmallCard {...item} />}
+            render={(item) => <SmallCard {...item } link={`tools/${item.link}&id=${item.title}`} />}
           />
         ) : null
       }

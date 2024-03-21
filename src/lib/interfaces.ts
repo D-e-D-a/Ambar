@@ -7,6 +7,7 @@ export interface SmallCardProps {
   description?: string;
   price?: number;
   place?: string;
+  link: string;
 }
 
 export interface BigCardProps {
