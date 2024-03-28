@@ -3,71 +3,19 @@ import SearchBar from '@/components/SearchBar';
 import { SelectBar } from '@/components/SelectBar';
 import { SmallCardProps } from '@/lib/interfaces';
 import { Suspense } from 'react';
+import {fetchNews,fetchCategories} from "starko-blog"
 
-export interface cardsProps {
-  category: string;
-  items: SmallCardProps[];
-}
-export default function page() {
-  const cards: cardsProps[] = [
-    {
-      category: 'drills',
-      items: [
-        {
-          id: 1,
-          imgUrl: '/busilica.png',
-          imgDescription: 'busilica sa dodacima za srafljenje i busenje',
-          title: 'PowerMax Pro Drill',
-          description: 'Rucna busilica sa dodacima za srafljenje i busenje',
-          place: 'Podgorica',
-          price: 200,
-          link: '/drills',
-        },
-        {
-          id: 2,
-          imgUrl: '/busilica.png',
-          imgDescription: 'busilica sa dodacima za srafljenje i busenje',
-          title: 'Pro Drill',
-          description: 'Rucna busilica sa dodacima za srafljenje i busenje',
-          place: 'Podgorica',
-          price: 200,
-          link: '/drills/pro-drill',
-        },
-        {
-          id: 3,
-          imgUrl: '/busilica.png',
-          imgDescription: 'busilica sa dodacima za srafljenje i busenje',
-          title: 'Power Pro Drill',
-          description: 'Rucna busilica sa dodacima za srafljenje i busenje',
-          place: 'Podgorica',
-          price: 200,
-          link: '/drills/power-pro-drill',
-        },
-      ],
-    },
-    {
-      category: 'wrenches',
-      items: [
-        {
-          id: 2,
-          imgUrl: '/busilica.png',
-          imgDescription: 'Rucna busilica sa dodacima za srafljenje i busenje',
-          title: 'TurboDrive Impact Wrench',
-          description: 'Rucna busilica sa dodacima za srafljenje i busenje',
-          place: 'Podgorica',
-          price: 200,
-          link: '/wrenches/turbodrive-impact-wrench',
-        },
-        // Add more wrench items as needed
-      ],
-    },
-    {
-      category: 'nesta',
-      items: [],
-    },
-    // Add more categories as needed
-  ];
 
+
+export default async function page() {
+ 
+  const data = await fetchNews({
+    lang: "sr-Latn-ME",
+  });
+  const categories = await fetchCategories()
+  // console.log("🚀 ~ page ~ categories:", categories)
+
+  console.log("🚀 ~ page ~ data:", data)
   return (
     <Suspense fallback={<div className="text-center">Loading...</div>}>
       <main className=" overflow-hidden space-y-8 mt-11">
@@ -79,14 +27,14 @@ export default function page() {
           </p>
         </div>
         <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4">
-          <SelectBar tools={cards} />
+          <SelectBar tools={data?.blogs} />
           <SearchBar className="h-10 rounded-lg lg:max-w-[837px]" />
           <p className="text-secondary-foreground text-base font-normal">
             Trenutno dostupno 200 alata
           </p>
         </div>
 
-        <AllTools cards={cards} />
+        <AllTools cards={data?.blogs} />
       </main>
     </Suspense>
   );

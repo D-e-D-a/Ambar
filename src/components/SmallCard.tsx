@@ -16,7 +16,7 @@ import Link from 'next/link';
 
 const SmallCard = ({
   className,
-  imgUrl,
+  thumbnailurl,
   description,
   imgDescription,
   place,
@@ -33,7 +33,7 @@ const SmallCard = ({
     >
       <CardHeader className="relative w-full h-[187px] rounded-xl overflow-hidden">
         <Image
-          src={imgUrl ? imgUrl : '/blur.png'}
+          src={thumbnailurl ? thumbnailurl : '/blur.png'}
           alt={imgDescription ? imgDescription : 'no image'}
           fill
           className="object-cover"
@@ -47,7 +47,7 @@ const SmallCard = ({
         </p>
       </CardContent>
       <CardFooter className="p-0 w-full">
-        <Link href={link} className={`${buttonVariants({ variant: 'default' })} w-full`}>Rezervisi</Link>
+        <Link href={link ? link : '/'} className={`${buttonVariants({ variant: 'default' })} w-full`}>Rezervisi</Link>
       </CardFooter>
     </Card>
   );

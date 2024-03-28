@@ -1,13 +1,14 @@
 export interface SmallCardProps {
   id?: number | string;
   className?: string;
-  imgUrl?: string;
+  thumbnailurl?: string;
   imgDescription?: string;
   title?: string;
   description?: string;
   price?: number;
   place?: string;
   link: string;
+  categoryname?: string;
 }
 
 export interface BigCardProps {
@@ -22,4 +23,11 @@ export interface BigCardProps {
   frameCount?: number;
   frameWidth?: number;
   frameHeight?: number;
+}
+
+
+export interface cardsProps {
+  // title: any;
+  // categoryname: string;
+  items: SmallCardProps[];
 }

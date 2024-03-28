@@ -43,7 +43,7 @@ const Navbar = () => {
         <Each
           className="flex flex-col gap-6 text-2xl font-bold text-primary"
           of={navigation}
-          render={(item) => <Link href={item.href}>{item.name}</Link>}
+          render={(item) => <Link href={item.href} onClick={() => setOpen(!open)}>{item.name}</Link>}
         />
       </div>
     </div>

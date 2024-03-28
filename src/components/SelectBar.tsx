@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react';
 
 interface SelectBarProps {
   tools: {
-    category: string;
+    categoryname: string;
     items: SmallCardProps[];
   }[];
 }
@@ -37,12 +37,11 @@ export function SelectBar({ tools }: SelectBarProps) {
       </SelectTrigger>
       <SelectContent className="">
         <SelectGroup>
-          <SelectLabel>Kategorije</SelectLabel>
           <Each
             of={tools}
             render={(item) => (
-              <SelectItem key={item.category} value={item.category}>
-                {item.category}
+              <SelectItem key={item.categoryname} value={item.categoryname}>
+                {item.categoryname}
               </SelectItem>
             )}
           />
