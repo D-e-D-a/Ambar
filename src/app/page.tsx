@@ -13,8 +13,15 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import SearchBar from '@/components/SearchBar';
+import { fetchNews } from 'starko-blog';
+import { Each } from '@/components/Each';
 
-export default function Home() {
+export default async function Home() {
+  const data = await fetchNews({
+    lang: 'sr-Latn-ME',
+    simpleMode: 'true',
+    limit: 100,
+  });
   return (
     <main className=" overflow-hidden space-y-8">
       <div className="flex flex-col lg:flex-row gap-2 items-center justify-center">
@@ -70,43 +77,16 @@ export default function Home() {
           </p>
           <Link
             href="/tools"
-            className={`${buttonVariants({ variant: 'link' })}"flex items-center pl-0 md:pl-2"` }
+            className={`${buttonVariants({ variant: 'link' })}"flex items-center pl-0 md:pl-2"`}
           >
             Pregledaj sve alate <ArrowRight className="ml-1" size={14} />
           </Link>
         </div>
         <div className="mt-8 hidden md:flex gap-4 justify-center lg:justify-between  flex-wrap">
-          <SmallCard
-            imgUrl="/busilica.png"
-            imgDescription="Rucna busilica sa dodacima za srafljenje i busenje"
-            title="Rucna Busilica - 24mm"
-            description="Rucna busilica sa dodacima za srafljenje i busenje"
-            place="Podgorica"
-            price={200}
-          />
-          <SmallCard
-            imgUrl="/busilica.png"
-            imgDescription="Rucna busilica sa dodacima za srafljenje i busenje"
-            title="Rucna Busilica - 24mm"
-            description="Rucna busilica sa dodacima za srafljenje i busenje"
-            place="Podgorica"
-            price={200}
-          />
-          <SmallCard
-            imgUrl="/busilica.png"
-            imgDescription="Rucna busilica sa dodacima za srafljenje i busenje"
-            title="Rucna Busilica - 24mm"
-            description="Rucna busilica sa dodacima za srafljenje i busenje"
-            place="Podgorica"
-            price={200}
-          />
-          <SmallCard
-            imgUrl="/busilica.png"
-            imgDescription="Rucna busilica sa dodacima za srafljenje i busenje"
-            title="Rucna Busilica - 24mm"
-            description="Rucna busilica sa dodacima za srafljenje i busenje"
-            place="Podgorica"
-            price={200}
+          <Each
+            className={`flex flex-wrap gap-5 justify-center md:justify-between items-center `}
+            of={data}
+            render={(item) => <SmallCard {...item} link={`tools/${item.slug}&id=${item._id} `} />}
           />
         </div>
         <div className="mt-8 md:hidden">
@@ -118,52 +98,30 @@ export default function Home() {
           >
             <CarouselContent className=" mx-auto">
               <CarouselItem className="sm:basis-2/3">
-                {' '}
-                <SmallCard
-                  imgUrl="/busilica.png"
-                  imgDescription="Rucna busilica sa dodacima za srafljenje i busenje"
-                  title="Rucna Busilica - 24mm"
-                  description="Rucna busilica sa dodacima za srafljenje i busenje"
-                  place="Podgorica"
-                  price={200}
-                />
-              </CarouselItem>
-              <CarouselItem className="sm:basis-2/3">
-                {' '}
-                <SmallCard
-                  imgUrl="/busilica.png"
-                  imgDescription="Rucna busilica sa dodacima za srafljenje i busenje"
-                  title="Rucna Busilica - 24mm"
-                  description="Rucna busilica sa dodacima za srafljenje i busenje"
-                  place="Podgorica"
-                  price={200}
-                />
-              </CarouselItem>
-              <CarouselItem className="sm:basis-2/3">
-                {' '}
-                <SmallCard
-                  imgUrl="/busilica.png"
-                  imgDescription="Rucna busilica sa dodacima za srafljenje i busenje"
-                  title="Rucna Busilica - 24mm"
-                  description="Rucna busilica sa dodacima za srafljenje i busenje"
-                  place="Podgorica"
-                  price={200}
+                <Each
+                  className={`flex flex-wrap gap-5 justify-center md:justify-between items-center `}
+                  of={data}
+                  render={(item) => (
+                    <SmallCard {...item} link={`tools/${item.slug}&id=${item._id} `} />
+                  )}
                 />
               </CarouselItem>
             </CarouselContent>
-            <CarouselPrevious className='absolute left-0' />
-            <CarouselNext className='absolute right-0' />
+            <CarouselPrevious className="absolute left-0" />
+            <CarouselNext className="absolute right-0" />
           </Carousel>
         </div>
       </div>
 
       {/* Find the right tools */}
       <div className="flex flex-col items-center pt-10 justify-center ">
-        <h2 className='text-3xl md:text-5xl font-semibold text-secondary'>Pronadji ono sto ti treba</h2>
+        <h2 className="text-3xl md:text-5xl font-semibold text-secondary">
+          Pronadji ono sto ti treba
+        </h2>
         <SearchBar className="my-10 lg:max-w-[770px] h-12" />
         <ImageGrid />
-        <p className='text-secondary text-base mt-5'>
-        Prilikom rentiranja bilo kojeg alata potpisujete ugovor o odgovornosti 
+        <p className="text-secondary text-base mt-5">
+          Prilikom rentiranja bilo kojeg alata potpisujete ugovor o odgovornosti
         </p>
       </div>
     </main>
