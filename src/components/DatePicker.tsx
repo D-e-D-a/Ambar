@@ -8,9 +8,15 @@ import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
-export default function DatePicker({placeholder}: {placeholder?: string}) {
-  const [date, setDate] = useState<Date>();
-
+export default function DatePicker({
+  placeholder,
+  setDate,
+  date,
+}: {
+  placeholder?: string;
+  setDate: (date: Date | undefined) => void;
+  date: Date | undefined;
+}) {
   return (
     <Popover>
       <PopoverTrigger asChild>

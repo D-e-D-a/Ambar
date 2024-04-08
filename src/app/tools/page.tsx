@@ -1,21 +1,16 @@
-import AllTools from '@/components/AllTools';
-import SearchBar from '@/components/SearchBar';
-import { SelectBar } from '@/components/SelectBar';
-import { SmallCardProps } from '@/lib/interfaces';
+import ToolSearchAndDisplay from '@/components/ToolSearchAndDisplay';
+
 import { Suspense } from 'react';
-import {fetchNews,fetchCategories} from "starko-blog"
-
-
-
+import { fetchNews, fetchCategories } from 'starko-blog';
 export default async function page() {
- 
   const data = await fetchNews({
-    lang: "sr-Latn-ME",
+    lang: 'sr-Latn-ME',
+    simpleMode: 'true',
+    limit: 100,
   });
-  const categories = await fetchCategories()
-  // console.log("🚀 ~ page ~ categories:", categories)
+  const categories = await fetchCategories();
+ 
 
-  console.log("🚀 ~ page ~ data:", data)
   return (
     <Suspense fallback={<div className="text-center">Loading...</div>}>
       <main className=" overflow-hidden space-y-8 mt-11">
@@ -26,15 +21,7 @@ export default async function page() {
             kratkorocnu upotrebu
           </p>
         </div>
-        <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4">
-          <SelectBar tools={data?.blogs} />
-          <SearchBar className="h-10 rounded-lg lg:max-w-[837px]" />
-          <p className="text-secondary-foreground text-base font-normal">
-            Trenutno dostupno 200 alata
-          </p>
-        </div>
-
-        <AllTools cards={data?.blogs} />
+      <ToolSearchAndDisplay data={data} categories={categories} />
       </main>
     </Suspense>
   );

@@ -1,12 +1,15 @@
 export interface SmallCardProps {
-  id?: number | string;
+  custom_field?: {
+    price?: number | string;
+    place?: string;
+  };
+  slug: string;
+  _id?: number | string;
   className?: string;
   thumbnailurl?: string;
   imgDescription?: string;
   title?: string;
-  description?: string;
-  price?: number;
-  place?: string;
+  summary?: string;
   link: string;
   categoryname?: string;
 }

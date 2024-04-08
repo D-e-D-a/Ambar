@@ -17,12 +17,11 @@ import Link from 'next/link';
 const SmallCard = ({
   className,
   thumbnailurl,
-  description,
+  summary,
   imgDescription,
-  place,
-  price,
+  custom_field,
   title,
-  link
+  link,
 }: SmallCardProps) => {
   return (
     <Card
@@ -36,18 +35,31 @@ const SmallCard = ({
           src={thumbnailurl ? thumbnailurl : '/blur.png'}
           alt={imgDescription ? imgDescription : 'no image'}
           fill
-          className="object-cover"
+          className="object-contain"
         />
       </CardHeader>
       <CardTitle className="text-lg font-semibold">{title}</CardTitle>
       <CardContent className="p-0 space-y-4 ">
-        <p>{description}</p>
+        <p className="line-clamp-2">
+          {summary ? (
+            summary
+          ) : (
+            <span className="text-secondary-foreground text-sm">
+              Additional details not available. <span>Contact us for more info.</span>
+            </span>
+          )}
+        </p>
         <p className="text-secondary-foreground text-sm flex items-center">
-          <MapPin size={18} className="mr-1" /> {place} - €{price}/dan
+          <MapPin size={18} className="mr-1" /> {custom_field?.place} - €{custom_field?.price}/dan
         </p>
       </CardContent>
       <CardFooter className="p-0 w-full">
-        <Link href={link ? link : '/'} className={`${buttonVariants({ variant: 'default' })} w-full`}>Rezervisi</Link>
+        <Link
+          href={link ? link : '/'}
+          className={`${buttonVariants({ variant: 'default' })} w-full`}
+        >
+          Rezervisi
+        </Link>
       </CardFooter>
     </Card>
   );

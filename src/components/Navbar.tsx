@@ -13,9 +13,10 @@ const Navbar = () => {
     { name: 'Kreativni hub', href: '/hub' },
   ];
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('');
   return (
     <div className="flex items-center justify-between gap-6 w-full pt-4 ">
-      <SearchBar />
+      <SearchBar globalSearch={true}  />
       {/* Desktop navigation */}
       <Each
         className="hidden md:flex gap-6 "

@@ -11,13 +11,11 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { SmallCardProps } from '@/lib/interfaces';
-import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 interface SelectBarProps {
   tools: {
-    categoryname: string;
+    name: string;
     items: SmallCardProps[];
   }[];
 }
@@ -27,8 +25,13 @@ export function SelectBar({ tools }: SelectBarProps) {
   const router = useRouter();
 
   const handleCategorySelect = (category: string) => {
-    router.push(`?category=${category}`);
+    if (category === 'all') {
+      router.push('/tools');
+    } else {
+      router.push(`/tools?category=${category}`);
+    }
   };
+
   const searchCategory = searchParams.get('category');
   return (
     <Select onValueChange={handleCategorySelect} value={searchCategory || ''}>
@@ -37,11 +40,14 @@ export function SelectBar({ tools }: SelectBarProps) {
       </SelectTrigger>
       <SelectContent className="">
         <SelectGroup>
+          <SelectItem value="all" key="all">
+            Sve kategorije
+          </SelectItem>
           <Each
             of={tools}
             render={(item) => (
-              <SelectItem key={item.categoryname} value={item.categoryname}>
-                {item.categoryname}
+              <SelectItem key={item.name} value={item.name}>
+                {item.name}
               </SelectItem>
             )}
           />

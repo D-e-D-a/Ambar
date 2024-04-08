@@ -4,6 +4,7 @@ import './globals.css';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { Toaster } from '@/components/ui/sonner';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -28,6 +29,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </MaxWidthWrapper>
+        <Toaster />
       </body>
     </html>
   );
