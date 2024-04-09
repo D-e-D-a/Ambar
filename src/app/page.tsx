@@ -15,13 +15,15 @@ import {
 import SearchBar from '@/components/SearchBar';
 import { fetchNews } from 'starko-blog';
 import { Each } from '@/components/Each';
+import { SmallCardProps } from '@/lib/interfaces';
 
 export default async function Home() {
   const data = await fetchNews({
     lang: 'sr-Latn-ME',
     simpleMode: 'true',
-    limit: 100,
+    limit: 4,
   });
+  console.log("🚀 ~ Home ~ data:", data)
   return (
     <main className=" overflow-hidden space-y-8">
       <div className="flex flex-col lg:flex-row gap-2 items-center justify-center">
@@ -85,8 +87,8 @@ export default async function Home() {
         <div className="mt-8 hidden md:flex gap-4 justify-center lg:justify-between  flex-wrap">
           <Each
             className={`flex flex-wrap gap-5 justify-center md:justify-between items-center `}
-            of={data}
-            render={(item) => <SmallCard {...item} link={`tools/${item.slug}&id=${item._id} `} />}
+            of={data?.blogs}
+            render={(item:SmallCardProps) => <SmallCard {...item} link={`tools/${item.slug}&id=${item._id} `} />}
           />
         </div>
         <div className="mt-8 md:hidden">
@@ -98,10 +100,11 @@ export default async function Home() {
           >
             <CarouselContent className=" mx-auto">
               <CarouselItem className="sm:basis-2/3">
+                <h3>gi</h3>
                 <Each
                   className={`flex flex-wrap gap-5 justify-center md:justify-between items-center `}
-                  of={data}
-                  render={(item) => (
+                  of={data?.blogs}
+                  render={(item:SmallCardProps) => (
                     <SmallCard {...item} link={`tools/${item.slug}&id=${item._id} `} />
                   )}
                 />
@@ -118,7 +121,7 @@ export default async function Home() {
         <h2 className="text-3xl md:text-5xl font-semibold text-secondary">
           Pronadji ono sto ti treba
         </h2>
-        <SearchBar className="my-10 lg:max-w-[770px] h-12" />
+        <SearchBar className="my-10 lg:max-w-[770px] h-12" globalSearch />
         <ImageGrid />
         <p className="text-secondary text-base mt-5">
           Prilikom rentiranja bilo kojeg alata potpisujete ugovor o odgovornosti

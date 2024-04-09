@@ -13,7 +13,7 @@ const page = async ({ params }: { params: any }) => {
     simpleMode: 'false'
   });
 
-  const filteredData = data.blogs.filter((blog: any) => blog._id === id);
+  const filteredData = data?.blogs?.filter((blog: any) => blog._id === id);
 
   return (
     <div className="flex justify-between w-full gap-14">
