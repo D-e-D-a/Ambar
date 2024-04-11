@@ -4,6 +4,7 @@ import { Each } from './Each';
 import { SmallCardProps } from '@/lib/interfaces';
 import { useSearchParams } from 'next/navigation';
 import SmallCard from './SmallCard';
+import { filterString } from '@/lib/utils';
 
 interface AllToolsProps {
   cards: SmallCardProps[];
@@ -37,7 +38,7 @@ const AllTools = ({ cards, search }: AllToolsProps) => {
         <Each
           className={`flex flex-wrap gap-5 justify-center md:justify-between items-center `}
           of={filteredCards}
-          render={(item) => <SmallCard {...item} link={`tools/${item.slug}&id=${item._id} `} />}
+          render={(item) => <SmallCard {...item} link={`tools/${filterString(item.slug)}&id=${item._id} `} />}
         />
       ) : (
         <h3 className="text-center text-xl">Trenutno nemamo u ponudi alate iz ove kategorije</h3>

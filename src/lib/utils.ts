@@ -1,10 +1,9 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
-
 
 export function extractIdFromParams(encodedParams: string): string | null {
   // Decode the URL-encoded string
@@ -27,5 +26,24 @@ export function extractTitleFromId(encodedId: string): string | null {
   const match = decodedId.match(/^([^&]+)/);
 
   // Check if a match is found and return the extracted title
-  return match ? match[1].replace(/%20/g, ' ') : null;
+  return match ? match[1].replace(/-/g, ' ') : null;
+}
+
+export function formattedDate(date: Date | undefined): string {
+  if (!date) {
+    return '';
+  }
+
+  return date.toLocaleDateString('sr-Latn-RS', {
+    weekday: 'short',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+}
+
+export function filterString(input: string): string {
+  // Replace spaces and '%20' with '/'
+  const filteredString: string = input.replace(/\//g, '-').replace(/%20/g, '-').replace(/ /g, '-');
+  return filteredString;
 }

@@ -10,13 +10,13 @@ const page = async ({ params }: { params: any }) => {
   const data = await fetchNews({
     lang: 'sr-Latn-ME',
     slug: title || '',
-    simpleMode: 'false'
+    simpleMode: 'false',
   });
 
   const filteredData = data?.blogs?.filter((blog: any) => blog._id === id);
 
   return (
-    <div className="flex justify-between w-full gap-14">
+    <div className="flex flex-col lg:flex-row justify-between w-full gap-14">
       {filteredData && (
         <>
           <BigCard
@@ -24,12 +24,11 @@ const page = async ({ params }: { params: any }) => {
             cardTitle={filteredData[0]?.title}
             price={filteredData[0]?.custom_field?.price}
             frameCount={35}
-            textDisplayClassName="text-invert"
           />
-          <div className="max-w-[510px] flex flex-col justify-between gap-4">
+          <div className="w-full lg:max-w-[510px] flex flex-col items-center justify-between gap-4">
             <h1 className="text-xl md:text-3xl font-semibold">{filteredData[0]?.title}</h1>
-            <div dangerouslySetInnerHTML={{ __html: filteredData[0]?.blog_content }}></div>
-            <ReservationForm />
+            <div dangerouslySetInnerHTML={{ __html: filteredData[0]?.blog_content || '' }} />
+            <ReservationForm toolName={filteredData[0]?.title} />
           </div>
         </>
       )}

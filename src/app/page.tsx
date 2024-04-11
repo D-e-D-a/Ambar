@@ -16,6 +16,7 @@ import SearchBar from '@/components/SearchBar';
 import { fetchNews } from 'starko-blog';
 import { Each } from '@/components/Each';
 import { SmallCardProps } from '@/lib/interfaces';
+import { filterString } from '@/lib/utils';
 
 export default async function Home() {
   const data = await fetchNews({
@@ -23,7 +24,6 @@ export default async function Home() {
     simpleMode: 'true',
     limit: 4,
   });
-  console.log("🚀 ~ Home ~ data:", data)
   return (
     <main className=" overflow-hidden space-y-8">
       <div className="flex flex-col lg:flex-row gap-2 items-center justify-center">
@@ -41,10 +41,10 @@ export default async function Home() {
                   <ArrowRight className="ml-1" size={14} />
                 </Link>
               </p>
-              <h1 className="text-3xl md:text-5xl font-semibold text-secondary text-left mb-5 lg:mb-0 lg:leading-[65px]">
+              <h1 className="text-3xl md:text-5xl text-balance font-semibold text-secondary text-left mb-5 lg:mb-0 lg:leading-[65px]">
                 Ne kupuj <br /> Rentiraj alat
               </h1>
-              <p className="text-secondary text-lg max-w-[400px] mb-7">
+              <p className="text-secondary text-lg max-w-[400px] mb-7 text-balance">
                 Ambar studio omogucava prstupacno rentiranje skupocjenih alata na teritoriji CG
               </p>
               <Link
@@ -84,36 +84,33 @@ export default async function Home() {
             Pregledaj sve alate <ArrowRight className="ml-1" size={14} />
           </Link>
         </div>
-        <div className="mt-8 hidden md:flex gap-4 justify-center lg:justify-between  flex-wrap">
+        <>
+          {/* Popular tools */}
           <Each
-            className={`flex flex-wrap gap-5 justify-center md:justify-between items-center `}
+            className="mt-8 hidden md:flex gap-4 justify-center lg:justify-between  flex-wrap"
             of={data?.blogs}
-            render={(item:SmallCardProps) => <SmallCard {...item} link={`tools/${item.slug}&id=${item._id} `} />}
+            render={(item: SmallCardProps) => (
+              <SmallCard {...item} link={`tools/${filterString(item.slug)}&id=${item._id} `} />
+            )}
           />
-        </div>
-        <div className="mt-8 md:hidden">
           <Carousel
+            className="w-full mt-8 md:hidden "
             opts={{
               align: 'center',
               loop: true,
             }}
           >
             <CarouselContent className=" mx-auto">
-              <CarouselItem className="sm:basis-2/3">
-                <h3>gi</h3>
-                <Each
-                  className={`flex flex-wrap gap-5 justify-center md:justify-between items-center `}
-                  of={data?.blogs}
-                  render={(item:SmallCardProps) => (
-                    <SmallCard {...item} link={`tools/${item.slug}&id=${item._id} `} />
-                  )}
-                />
-              </CarouselItem>
+              {data?.blogs.map((item: SmallCardProps) => (
+                <CarouselItem key={item._id} className="sm:basis-2/3">
+                  <SmallCard {...item} link={`tools/${filterString(item.slug)}&id=${item._id}`} />
+                </CarouselItem>
+              ))}
             </CarouselContent>
             <CarouselPrevious className="absolute left-0" />
             <CarouselNext className="absolute right-0" />
           </Carousel>
-        </div>
+        </>
       </div>
 
       {/* Find the right tools */}
