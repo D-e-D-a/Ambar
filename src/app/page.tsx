@@ -15,7 +15,7 @@ import {
 import SearchBar from '@/components/SearchBar';
 import { fetchNews } from 'starko-blog';
 import { Each } from '@/components/Each';
-import { SmallCardProps } from '@/lib/interfaces';
+import { BlogProps } from '@/lib/interfaces';
 import { filterString } from '@/lib/utils';
 
 export default async function Home() {
@@ -89,8 +89,8 @@ export default async function Home() {
           <Each
             className="mt-8 hidden md:flex gap-4 justify-center lg:justify-between  flex-wrap"
             of={data?.blogs}
-            render={(item: SmallCardProps) => (
-              <SmallCard {...item} link={`tools/${filterString(item.slug)}&id=${item._id} `} />
+            render={(item: BlogProps) => (
+              <SmallCard data={item} link={`tools/${filterString(item.slug)}&id=${item._id} `} />
             )}
           />
           <Carousel
@@ -101,9 +101,9 @@ export default async function Home() {
             }}
           >
             <CarouselContent className=" mx-auto">
-              {data?.blogs.map((item: SmallCardProps) => (
+              {data?.blogs.map((item: BlogProps) => (
                 <CarouselItem key={item._id} className="sm:basis-2/3">
-                  <SmallCard {...item} link={`tools/${filterString(item.slug)}&id=${item._id}`} />
+                  <SmallCard data={item} link={`tools/${filterString(item.slug)}&id=${item._id}`} />
                 </CarouselItem>
               ))}
             </CarouselContent>

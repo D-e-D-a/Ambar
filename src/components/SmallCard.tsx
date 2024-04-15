@@ -10,19 +10,18 @@ import {
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
-import { Button, buttonVariants } from './ui/button';
-import { SmallCardProps } from '@/lib/interfaces';
+import { buttonVariants } from './ui/button';
+import { BlogProps } from '@/lib/interfaces';
 import Link from 'next/link';
 
-const SmallCard = ({
-  className,
-  thumbnailurl,
-  summary,
-  imgDescription,
-  custom_field,
-  title,
-  link,
-}: SmallCardProps) => {
+type SmallCardProps = {
+  data: BlogProps;
+  className?: string;
+  imgDescription?: string;
+  link?: string;
+};
+
+const SmallCard = ({ className, imgDescription, data, link }: SmallCardProps) => {
   return (
     <Card
       className={cn(
@@ -32,25 +31,26 @@ const SmallCard = ({
     >
       <CardHeader className="relative w-full h-[187px] rounded-xl overflow-hidden">
         <Image
-          src={thumbnailurl ? thumbnailurl : '/blur.png'}
+          src={data.thumbnailurl ? data.thumbnailurl : '/blur.png'}
           alt={imgDescription ? imgDescription : 'no image'}
           fill
           className="object-contain"
         />
       </CardHeader>
-      <CardTitle className="text-lg font-semibold">{title}</CardTitle>
+      <CardTitle className="text-lg font-semibold">{data.title}</CardTitle>
       <CardContent className="p-0 space-y-4 ">
         <p className="line-clamp-2">
-          {summary ? (
-            summary
+          {data.summary ? (
+            data.summary
           ) : (
             <span className="text-secondary-foreground text-sm">
               Additional details not available. <span>Contact us for more info.</span>
             </span>
           )}
         </p>
-        <p className="text-secondary-foreground text-sm flex items-center">
-          <MapPin size={18} className="mr-1" /> {custom_field?.place} - €{custom_field?.price}/dan
+        <p className="text-secondary-foreground text-sm flex datas-center">
+          <MapPin size={18} className="mr-1" /> {data.custom_field?.place} - €
+          {data.custom_field?.price}/dan
         </p>
       </CardContent>
       <CardFooter className="p-0 w-full">

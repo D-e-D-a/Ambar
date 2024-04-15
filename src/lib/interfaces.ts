@@ -1,18 +1,25 @@
-export interface SmallCardProps {
+
+export interface BlogProps {
+  summary?: string;
   custom_field?: {
-    price?: number | string;
+    price?: string;
     place?: string;
   };
-  slug: string;
-  _id?: number | string;
-  className?: string;
-  thumbnailurl?: string;
-  imgDescription?: string;
+  author?: string;
   title?: string;
-  summary?: string;
-  link: string;
+  published_at?: string;
+  _id?: string;
+  slug: string;
+  thumbnail_id?: string;
+  created_at?: string;
+  updated_at?: string;
+  lang?: string;
+  project_id?: string;
+  thumbnailurl?: string;
   categoryname?: string;
 }
+
+
 
 export interface BigCardProps {
   img?: string;
@@ -30,7 +37,6 @@ export interface BigCardProps {
 
 
 export interface cardsProps {
-  // title: any;
-  // categoryname: string;
-  items: SmallCardProps[];
+
+  items: BlogProps[];
 }

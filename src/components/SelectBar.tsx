@@ -10,13 +10,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { SmallCardProps } from '@/lib/interfaces';
+import { BlogProps } from '@/lib/interfaces';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 interface SelectBarProps {
   tools: {
     name: string;
-    items: SmallCardProps[];
+    items: BlogProps[];
   }[];
 }
 
