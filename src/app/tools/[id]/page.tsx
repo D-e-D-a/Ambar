@@ -11,8 +11,6 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-
-
 async function fetchData(id: string, title: string) {
   try {
     const data = await fetchNews({
@@ -31,9 +29,13 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const id = extractIdFromParams(params.id);
-  const title = extractTitleFromId(params.id);
-  const filteredData = await fetchData(id, title);
+  const id = extractIdFromParams(params.id) || '1';
+  const title = extractTitleFromId(params.id) || 'Default Title';
+  let filteredData = [];
+
+  if (id !== '1' && title !== 'Default Title') {
+    filteredData = await fetchData(id, title);
+  }
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
@@ -47,13 +49,19 @@ export async function generateMetadata(
 const page = async ({ params }: { params: any }) => {
   const id = extractIdFromParams(params.id) || '1';
   const title = extractTitleFromId(params.id) || 'Default Title';
-  const filteredData = await fetchData(id, title);
+  let filteredData = [];
+
+  if (id !== '1' && title !== 'Default Title') {
+    filteredData = await fetchData(id, title);
+  }
 
   return (
     <>
       {id === '1' || title === 'Default Title' ? (
         <div className="flex justify-center items-center h-screen">
-          <h2 className="text-2xl font-semibold">We couldn`&apos;`t find the data you`&apos;`re looking for. Please try again later.</h2>
+          <h2 className="text-2xl font-semibold">
+            We couldn`&apos;`t find the data you`&apos;`re looking for. Please try again later.
+          </h2>
         </div>
       ) : (
         <div className="flex flex-col lg:flex-row justify-between w-full gap-14">
@@ -77,6 +85,5 @@ const page = async ({ params }: { params: any }) => {
     </>
   );
 };
-
 
 export default page;
