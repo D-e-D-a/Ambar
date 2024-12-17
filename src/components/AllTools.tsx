@@ -34,13 +34,14 @@ const AllTools = ({ cards, search }: AllToolsProps) => {
 
   return (
     <div className="flex flex-col gap-5 ">
-      {filteredCards.length > 0 ? (
-       <Each
-       className={`flex flex-wrap gap-5 justify-center md:justify-between items-center `}
-       of={filteredCards}
-       render={(item) => <SmallCard data={item} link={`tools/${filterString(item.slug)}&id=${item._id} `} />}
-     />
-     
+      {filteredCards?.length > 0 ? (
+        <Each
+          className={`flex flex-wrap gap-5 justify-center md:justify-between items-center `}
+          of={filteredCards}
+          render={(item) => (
+            <SmallCard data={item} link={`tools/${filterString(item.slug)}&id=${item._id} `} />
+          )}
+        />
       ) : (
         <h3 className="text-center text-xl">Trenutno nemamo u ponudi alate iz ove kategorije</h3>
       )}

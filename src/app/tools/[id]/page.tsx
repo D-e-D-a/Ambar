@@ -72,6 +72,7 @@ const page = async ({ params }: { params: any }) => {
                 cardTitle={filteredData[0]?.title}
                 price={filteredData[0]?.custom_field?.price}
                 frameCount={35}
+                textDisplayClassName="text-black"
               />
               <div className="w-full lg:max-w-[510px] flex flex-col items-center justify-between gap-4">
                 <h1 className="text-xl md:text-3xl font-semibold">{filteredData[0]?.title}</h1>

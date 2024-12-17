@@ -101,7 +101,7 @@ export default async function Home() {
             }}
           >
             <CarouselContent className=" mx-auto">
-              {data?.blogs.map((item: BlogProps) => (
+              {data?.blogs?.map((item: BlogProps) => (
                 <CarouselItem key={item._id} className="sm:basis-2/3">
                   <SmallCard data={item} link={`tools/${filterString(item.slug)}&id=${item._id}`} />
                 </CarouselItem>
@@ -123,6 +123,46 @@ export default async function Home() {
         <p className="text-secondary text-base mt-5">
           Prilikom rentiranja bilo kojeg alata potpisujete ugovor o odgovornosti
         </p>
+      </div>
+
+      {/* Disclaimer */}
+      <div className="shadow-[0px_20px_20px_10px_#00000024] rounded-md p-5">
+        <div className="flex justify-around items-center gap-4">
+          <Image
+            src="/eu.png"
+            alt="disclaimer"
+            width={150}
+            height={150}
+            // className="w-full"
+          />
+          <Image
+            src="/ipa.png"
+            alt="disclaimer"
+            width={150}
+            height={150}
+            // className="w-full"
+          />
+          <Image
+            src="/min.png"
+            alt="disclaimer"
+            width={250}
+            height={250}
+            // className="w-full"
+          />
+          <Image
+            src="/vlada.png"
+            alt="disclaimer"
+            width={150}
+            height={150}
+            // className="w-full"
+          />
+        </div>
+        <h2 className="text-center md:text-justify">
+          Sajt je nastao u okviru projekta “Održive kreativne industrije” koji je podržan kroz
+          jednogodišnji akcioni program za Crnu Goru za 2020. godinu „Podrška pametnom i inkluzivnom
+          rastu – zapošljavanje i socijalna inkluzija” koji finasira Evropska Unija, a sufinansira
+          Vlada Crne Gore i Ministartvo javne uprave Crne Gore.
+        </h2>
       </div>
     </main>
   );

@@ -1,4 +1,3 @@
-
 export interface BlogProps {
   summary?: string;
   custom_field?: {
@@ -19,8 +18,6 @@ export interface BlogProps {
   categoryname?: string;
 }
 
-
-
 export interface BigCardProps {
   img?: string;
   imgTitle?: string;
@@ -35,8 +32,6 @@ export interface BigCardProps {
   frameHeight?: number;
 }
 
-
 export interface cardsProps {
-
   items: BlogProps[];
 }

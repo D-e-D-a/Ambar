@@ -42,7 +42,6 @@ const BigCard = ({
         src={img ? img : '/barn.png'}
         alt={imgTitle ? imgTitle : 'barn'}
         layout="fill"
-       
         className="rounded-2xl object-cover"
       />
       <div className="flex w-full ">{frames()}</div>

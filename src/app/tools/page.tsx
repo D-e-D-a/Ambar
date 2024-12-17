@@ -1,7 +1,13 @@
-import ToolSearchAndDisplay from '@/components/ToolSearchAndDisplay';
-
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { fetchNews, fetchCategories } from 'starko-blog';
+import ToolSearchAndDisplay from '@/components/ToolSearchAndDisplay';
+
+export const metadata: Metadata = {
+  title: 'Tools',
+};
+
+// Output: <title>About | Acme</title>
 export default async function page() {
   const data = await fetchNews({
     lang: 'sr-Latn-ME',
@@ -9,7 +15,6 @@ export default async function page() {
     limit: 100,
   });
   const categories = await fetchCategories();
- 
 
   return (
     <Suspense fallback={<div className="text-center">Loading...</div>}>
@@ -21,7 +26,7 @@ export default async function page() {
             kratkorocnu upotrebu
           </p>
         </div>
-      <ToolSearchAndDisplay data={data} categories={categories} />
+        <ToolSearchAndDisplay data={data} categories={categories} />
       </main>
     </Suspense>
   );
